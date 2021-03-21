@@ -1,0 +1,20 @@
+(udacity) cloud_user@k8s-control:~/Udacity-Operationalize-a-Machine-Learning-Microservice-API$ ./run_kubernetes.sh 
+Flag --generator has been deprecated, has no effect and will be removed in the future.
+Error from server (AlreadyExists): pods "udacity" already exists
+NAME                READY   STATUS             RESTARTS   AGE
+auth-microservice   1/1     Running            0          48m
+data-backend        1/1     Running            0          48m
+udacity             1/1     Running            0          64s
+web-frontend        0/1     CrashLoopBackOff   14         48m
+Forwarding from 127.0.0.1:8000 -> 9090
+Forwarding from [::1]:8000 -> 9090
+Handling connection for 8000
+
+
+cloud_user@k8s-control:~/Udacity-Operationalize-a-Machine-Learning-Microservice-API$ ./make_prediction.sh 
+Port: 8000
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
