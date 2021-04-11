@@ -24,6 +24,7 @@ jobs:
           name: install dependencies
           command: |
             pwd
+            ls -la
             exit 0
             python3 -m venv venv
             . venv/bin/activate
