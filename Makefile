@@ -8,8 +8,8 @@
 setup:
 	# Create python virtualenv & source it
 	# source ~/.devops/bin/activate
-	python3 -m venv udacity
-	. udacity/bin/activate
+	 python3 -m venv venv
+	. venv/bin/activate
 
 install:
 	# This should be run from inside a virtualenv
