@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-version: 2.1
+version: 2
 jobs:
   install-dependencies:
     docker:
@@ -17,14 +17,17 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
-
+      - run:
+          name: setup env
+          command: |
+            make setup
       - run:
           name: install dependencies
           command: |
             make install
       - save_cache:
           paths:
-            - ./venv
+            - ./udacity
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
   lint-code:
@@ -37,6 +40,8 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
+          paths:
+            - ./udacity
       - run:
           name: run lint
           command: |
@@ -45,6 +50,7 @@ jobs:
 workflows:
   default:
     jobs:
+      # - node-exporter
       - install-dependencies
       - lint-code:
           requires: [install-dependencies]
