@@ -45,6 +45,7 @@ jobs:
       - run:
           name: run lint
           command: |
+            . udacity/bin/activate
             make lint
 
 workflows:
