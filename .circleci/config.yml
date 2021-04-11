@@ -48,6 +48,17 @@ jobs:
             . venv/bin/activate
             make lint
 
+  build-image:
+    machine: true
+    steps:
+      - checkout
+      - run: |
+          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+
+      - run: docker build -t udacityCapstone:$CIRCLE_BRANCH .
+
+      - run: docker push udacityCapstone:$CIRCLE_BRANCH
+
 workflows:
   default:
     jobs:
@@ -55,3 +66,5 @@ workflows:
       - install-dependencies
       - lint-code:
           requires: [install-dependencies]
+      - build-image:
+          requires: [lint-code]
