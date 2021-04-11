@@ -1,41 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udacity
+  name: udacity-capstone
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: udacity
-  minReadySeconds: 5
+      app: udacity-capstone
   template:
     metadata:
       labels:
-        app: udacity
+        app: udacity-capstone
     spec:
       containers:
-      - name: udacity
-        image: mughees08/udacity:latest
+      - name: udacity-capstone
+        image: mughees08/udacity-capstone
         imagePullPolicy: Always
         ports:
         - containerPort: 9090
           name: default-port
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: udacity
-  labels:
-    app: udacity
-spec:
-  type: NodePort
-  ports:
-  - port: 9090
-    targetPort: 9090
-    protocol: TCP
-    name: http
-  selector:
-    app: udacity
-
