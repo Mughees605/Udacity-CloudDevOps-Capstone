@@ -4,7 +4,7 @@
 
 # Step 1:
 # Build image and add a descriptive tag
-sudo docker build -t mughees08/udacity:latest .
+sudo docker build -t udacity:latest .
 
 # Step 2: 
 # List docker images
@@ -12,4 +12,4 @@ sudo docker image ls
 
 # Step 3: 
 # Run flask app
-sudo docker run -p 9090:9090 mughees08/udacity
+sudo docker run -p 9090:9090 udacity
