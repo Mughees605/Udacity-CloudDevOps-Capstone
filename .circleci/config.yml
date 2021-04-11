@@ -10,7 +10,6 @@ jobs:
       - image: python:3.7.3-stretch
 
     working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -24,6 +23,8 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            pwd
+            exit 0
             python3 -m venv venv
             . venv/bin/activate
             make install
