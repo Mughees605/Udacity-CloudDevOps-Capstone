@@ -3,6 +3,12 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:13.8.0
+
 jobs:
   install-dependencies:
     docker:
@@ -59,12 +65,42 @@ jobs:
 
       - run: docker push mughees08/udacity-capstone:$CIRCLE_BRANCH
 
+  deploy-container:
+    executor: node
+    steps:
+      - checkout
+      - run:
+          name: Install AWS CLI dependencies
+          command: |
+            ls -la
+            sudo apt-get update && sudo apt-get install -yy less
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            aws --version
+      - run:
+          name: Install Kubectl
+          command: |
+            curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+            curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl.sha256
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+            kubectl version --short --client
+      - run:
+          name: Install ekstcl
+          command: |
+            curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            sudo mv /tmp/eksctl /usr/local/bin
+            eksctl version
+
 workflows:
   default:
     jobs:
       # - node-exporter
-      - install-dependencies
-      - lint-code:
-          requires: [install-dependencies]
-      - build-image:
-          requires: [lint-code]
+      - deploy-container
+      # - install-dependencies
+      # - lint-code:
+      #     requires: [install-dependencies]
+      # - build-image:
+      #     requires: [lint-code]
