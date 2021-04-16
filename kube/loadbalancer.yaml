@@ -1,14 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: loadbalancer
+  name: nginx-svc
   labels:
-    app: loadbalancer
+    env: dev
 spec:
   type: LoadBalancer
-  selector:
-    app: udacity-capstone
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 9090
+  - port: 80
+  selector:
+    env: dev

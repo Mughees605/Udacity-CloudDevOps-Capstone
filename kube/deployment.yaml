@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udacity-capstone
+  name: nginx-deployment
+  labels:
+    env: dev
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: udacity-capstone
+      env: dev
   template:
     metadata:
       labels:
-        app: udacity-capstone
+        env: dev
     spec:
       containers:
-      - name: udacity-capstone
-        image: mughees08/udacity-capstone
-        imagePullPolicy: Always
+      - name: nginx
+        image: nginx
         ports:
-        - containerPort: 9090
-          name: default-port
+        - containerPort: 80
