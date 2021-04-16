@@ -96,7 +96,13 @@ jobs:
       - run:
           name: Create Kubernetes Cluster
           command: |
-            eksctl create cluster --name udacity-capstone --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.micro --nodes 2 --nodes-min 1 --nodes-max 2 --managed --zones us-east-1a,us-east-1b,us-east-1c
+            aws eks --region us-east-1 update-kubeconfig --name udacity-capstone
+            kubectl apply -f kube/loadbalancer.yaml
+            kubectl apply -f kube/deployment.yaml
+            kubectl get nodes
+            kubectl get deployment
+            kubectl get pod
+
 
 workflows:
   default:
