@@ -102,6 +102,8 @@ jobs:
             kubectl get nodes
             kubectl get deployment
             kubectl get pod
+            kubectl get services
+            kubectl --kubeconfig ~/.kube/config rollout restart deployment udacity-capstone
 
 
 workflows:
