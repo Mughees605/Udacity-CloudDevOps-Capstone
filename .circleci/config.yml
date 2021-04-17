@@ -86,10 +86,10 @@ jobs:
             curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
             sudo mv /tmp/eksctl /usr/local/bin
             eksctl version
-      - run:
-          name: Create ekstcl
-          command: |
-            eksctl create cluster --name udacity-capstone --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 2 --nodes-max 3 --managed --zones us-east-1a,us-east-1b,us-east-1c
+      # - run:
+      #     name: Create ekstcl
+      #     command: |
+      #       eksctl create cluster --name udacity-capstone --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 2 --nodes-max 3 --managed --zones us-east-1a,us-east-1b,us-east-1c
       - run:
           name: Deploy To Kubernetes Cluster
           command: |
@@ -117,6 +117,3 @@ workflows:
           requires: [lint-code]
       - deploy-container-to-eks:
           requires: [build-image]
-          filters:
-            branches:
-              only: [test-feature-branch]
