@@ -115,7 +115,7 @@ workflows:
           requires: [install-dependencies]
       - build-image:
           requires: [lint-code]
-      - deploy-container:
+      - deploy-container-to-eks:
           requires: [build-image]
           filters:
             branches:
