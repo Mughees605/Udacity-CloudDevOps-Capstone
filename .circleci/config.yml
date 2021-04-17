@@ -105,6 +105,24 @@ jobs:
           command: |
             kubectl --kubeconfig ~/.kube/config rollout restart deployment udacity-capstone
 
+  rolling-restart:
+    executor: node
+    steps:
+      - checkout
+      - run:
+          name: Install Kubectl
+          command: |
+            curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+            curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl.sha256
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+            kubectl version --short --client
+      - run:
+          name: Rolling Restart
+          command: |
+            kubectl --kubeconfig ~/.kube/config rollout restart deployment udacity-capstone
+
 
 
 workflows:
