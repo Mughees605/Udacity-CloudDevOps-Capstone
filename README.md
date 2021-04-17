@@ -13,3 +13,19 @@ In this project, it is required to apply the skills and knowledge obtained from 
 6. Built Docker containers in pipelines (Dockerhub)
 
 The CI/CD pipeline for microservices applications is developed with rolling deployment. Linting is also done to check typographical errors. 
+
+### Python Virtual Environment
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Mughees605/Udacity-CloudDevOps-Capstone
+    ```
+
+2. Setup `venv`:
+
+    ```bash
+    python -m venv ~/.capstone
+    source ~/.capstone/bin/activate
+    ```
+
+3. Run `make install && make lint`
+4. Run `python app.py` to run the flask app.
