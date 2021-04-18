@@ -133,5 +133,5 @@ workflows:
           requires: [install-dependencies]
       - build-image:
           requires: [lint-code]
-      - deploy-container-to-eks:
-          requires: [build-image]
+      # - deploy-container-to-eks:
+      #     requires: [build-image]
