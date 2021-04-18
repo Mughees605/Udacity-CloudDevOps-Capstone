@@ -14,18 +14,28 @@ In this project, it is required to apply the skills and knowledge obtained from 
 
 The CI/CD pipeline for microservices applications is developed with rolling deployment. Linting is also done to check typographical errors. 
 
-### Python Virtual Environment
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/Mughees605/Udacity-CloudDevOps-Capstone
-    ```
+## Getting Started
 
-2. Setup `venv`:
+To get a local copy up and running follow these simple example steps.
 
-    ```bash
-    python -m venv ~/.capstone
-    source ~/.capstone/bin/activate
-    ```
+### Prerequisites
 
-3. Run `make install && make lint`
-4. Run `python app.py` to run the flask app.
+1. Create an AWS account
+2. Connect Your Repository with CircleCI.
+3. Create a [Docker](hub.docker.com) account.
+4. EKS can be created manually by using the command below.
+```
+eksctl create cluster --name <cluster-name> --version 1.16 --nodegroup-name standard-workers --node-type t3.medium --nodes 3 --nodes-min 1 --nodes-max 4 --node-ami auto --region us-east-1
+```
+6. Setup the credentials in CircleCi for AWS credentials and dockerhub credentials
+
+### Installation
+
+1. Clone the repo
+```sh
+git clone https://github.com/Mughees605/Udacity-CloudDevOps-Capstone
+```
+2. Run `make lint` to lint the app locally.
+3. Run `./run-docker.sh` and `./run-kubernetes.sh` to run locally.
+4. Upload the api to DockerHub by using `./upload-docker.sh`
+5. Used CircleCI for CI/CD
